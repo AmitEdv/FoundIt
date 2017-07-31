@@ -1,0 +1,101 @@
+<div class="row">
+	<div class="col-sm-6 col-md-4 col-md-offset-4 col-sm-offset-3">
+		<form action="/user/add-qrcode" method="post">
+			<div class="container">
+				<label for="name">QR Tag Name</label>
+				<input type="text" name="name">
+				</br>
+				<span>Send to..</span>
+				<input name="collapseGroup" type="radio" value="1" data-toggle="collapse" data-target="#collapseOne" checked/> Only Me
+				<input name="collapseGroup" type="radio" value="2" data-toggle="collapse" data-target="#phone"/> Me and Another
+				<input name="collapseGroup" type="radio" value="3" data-toggle="collapse" data-target="#phone"/> Only Another
+					<div class="panel-group" id="accordion">
+						<div id="collapseOne" class="panel-collapse collapse">
+							<div class="panel-body">
+								<p>Message to Phone and Email will be sent only to you.</p>
+							</div>
+						</div>
+						<div id="phone" name="info" class="panel-collapse collapse">
+							<div class="form-group">
+								<label for="otherphone">Phone Number of Another </label>
+								<input type="text" name="otherphone" class="form-control">
+							</div>
+							<div class="form-group">
+								<label for="otheremail">Email of Another </label>
+								<input type="text" name="otheremail" class="form-control">
+							</div>
+						</div>
+						<!-- <div id="phone1" name="info" class="panel-collapse collapse">
+							<div class="form-group">
+								<label for="otherphone">Phone Number of Another </label>
+								<input type="text" name="otherphone" class="form-control">
+							</div>
+							<div class="form-group">
+								<label for="otheremail">Email of Another </label>
+								<input type="text" name="otheremail" class="form-control">
+							</div>
+						</div>	-->
+					</div>
+			</div>
+			<!-- <strong>Send to..</strong>
+			<select class="form-control" id="viewSelector">
+				<option value='1'>Only Me</option>
+				<option value='2'>Me and Another</option>
+				<option value='3'>Another</option>
+			</select>
+			
+			<div class="collapse" id="view2">
+				<div class="form-group">
+					<label for="otherphone">Phone Number of Another </label>
+					<input type="text" name="otherphone" class="form-control">
+				</div>
+				<div class="form-group">
+					<label for="otheremail">Email of Another </label>
+					<input type="text" name="otheremail" class="form-control">
+				</div>
+			</div>
+			<div class="collapse" id="view3">
+				<div class="form-group">
+					<label for="otherphone">Phone Number of Another </label>
+					<input type="text" name="otherphone" class="form-control">
+				</div>
+				<div class="form-group">
+					<label for="otheremail">Email of Another </label>
+					<input type="text" name="otheremail" class="form-control">
+				</div>
+			</div>
+			
+			<div class="collapse" id="phone1">
+				<div class="form-group">
+					<label for="otherphone">Phone Number of Another </label>
+					<input type="text" name="otherphone1" class="form-control">
+				</div>
+				<div class="form-group">
+					<label for="otheremail">Email of Another </label>
+					<input type="text" name="otheremail1" class="form-control">
+				</div>
+			</div>
+			-->
+			
+			<input type="hidden" name="_csrf" value="{{ csrfToken }}">
+			</br>
+			<button type="submit" class='btn btn-primary'>Add QR Code</button>
+			
+		</form>
+	</div>
+</div>
+
+<!-- <script>
+$(document).ready(function() {
+  $.viewMap = {
+    '1' : $([]),
+    '2' : $('#view2'),
+    '3' : $('#view3')
+  };
+
+  $('#viewSelector').change(function() {
+    $.each($.viewMap, function() { this.hide(); });
+    $.viewMap[$(this).val()].show();
+  });
+});
+</script> -->

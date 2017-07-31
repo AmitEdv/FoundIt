@@ -1,0 +1,48 @@
+<h1>{{title}}</h1>
+<hr>
+{{#if hasErrors}}
+	<div class="alert alert-success" role="alert">
+	{{# each messages }}
+		<p>{{this}}</p>
+	{{/each}}
+	</div>
+	<hr>
+{{/if}}
+{{#if noItems}}
+	<div class="col-sm-6 col-md-4">
+		<p>You currently have no QR Codes</p>
+		<form action="/user/add-qrcode" method="get">
+			<div class="col-sm-6 col-md-4">
+				<button type="submit" class='btn btn-primary'>Add QR Code</button>
+			</div>	
+		</form>
+	</div>
+{{ else }}
+	{{# each items }}
+		<div class="row">
+		  <div class="col-sm-6 col-md-4">
+			<div class="thumbnail">
+			  <img src="{{ imagePath }}" alt="..." class="img-responsive">
+			  <div class="caption">
+				<h3>{{ title }}</h3>
+				{{#if sendToMe}}
+					<p>Message will be sent only to me. </p>
+				{{else if sendMeOther}}
+					<p>Message will be sent to me and to another: </p>
+					<p>Phone of other: {{otherPhone}}</p>
+					<p>Email of other: {{otherEmail}}</p>
+				{{ else }}
+					<p>Message will be sent only to another: </p>
+					<p>Phone of other: {{otherPhone}} </p>
+					<p>Email of other: {{otherEmail}} </p>
+				{{/if}}
+				<div class="clearfix">
+					<a href="#" class="btn btn-primary" role="button">Edit</a> 
+					<a href="/user/delete/{{_id}}" class="btn btn-default" role="button">Delete</a>
+				</div>
+			  </div>
+			</div>
+		  </div>
+		</div>
+	{{/each}}
+{{/if}}
