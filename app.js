@@ -18,7 +18,7 @@ var userRoutes = require('./routes/user');
 var app = express();
 
 //mongoose.Promise = global.Promise;
-mongoose.connect('localhost:27017/foundit');
+mongoose.connect('mongodb://foundit:foundit@ds129342.mlab.com:29342/heroku_1c9js8c6');
 require('./config/passport');//load it so that it'll run through passport.js and then index.js will be able to use it
 
 // view engine setup
