@@ -30,5 +30,6 @@
     "passport-local": "^1.0.0",
     "qrcode-npm": "0.0.3",
     "serve-favicon": "~2.4.2"
+    "nodemailer": "^4.0.1"
   }
 }
