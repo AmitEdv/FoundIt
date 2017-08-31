@@ -1,9 +1,21 @@
-<h1>User Profile</h1>
+<div class="center">
+    <h1>User Profile</h1>
+</div>
 <hr>
-<h2> Hello {{ name }} ! </h2>
+<section class="content-section-a">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-5 ml-auto">
+                <div class="clearfix"></div>
+                <h2 class="section-heading"> Hello {{ name }} ! </h2>
 
-<form action="/user/add-qrcode" method="get">
-	<div class="col-sm-6 col-md-4">
-		<button type="submit" class='btn btn-primary'>Add QR Code</button>
-	</div>	
-</form>
+                <p class="lead"> Would you like to add another item?</p>
+                <form action="/user/add-qrcode" method="get">
+                	<div class="col-sm-6 col-md-4">
+                		<button type="submit" class='btn btn-primary'>Add QR Code</button>
+                	</div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
