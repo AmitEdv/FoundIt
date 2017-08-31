@@ -10,6 +10,14 @@
 	background-size: contain;
 	position: absolute;
 }
+.img2 {
+	right: 0px;
+	height: 300px;
+	width: 200px;
+	background: url(../images/Eilat.jpg) no-repeat center center;
+	background-size: contain;
+	position: absolute;
+}
 /*!
  * Start Bootstrap - Landing Page (http://startbootstrap.com/template-overviews/landing-page)
  * Copyright 2013-2017 Start Bootstrap
