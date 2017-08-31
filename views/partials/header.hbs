@@ -8,7 +8,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="/">Home</a>
+      <a class="navbar-brand" href="/"> <i class="fa fa-home" aria-hidden="true"> </i> Home </a>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
@@ -19,21 +19,21 @@
 	  <ul class="nav navbar-nav navbar-right">
 		{{# if login }}
 			<li class="dropdown">
-			  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">User Settings <span class="caret"></span></a>
+			  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-user" aria-hidden="true"></i> User Settings <span class="caret"></span></a>
 			  <ul class="dropdown-menu">
 				
-					<li><a href="/user/profile">Profile</a></li>
+					<li><a href="/user/profile"><i class="fa fa-user" aria-hidden="true"></i> Profile</a></li>
 					<li role="separator" class="divider"></li>
-					<li><a href="/user/items">Items</a></li>
+					<li><a href="/user/items"><i class="fa fa-list" aria-hidden="true"></i> Items</a></li>
 					<li role="separator" class="divider"></li>
-					<li><a href="/user/logout">Logout</a></li>
+					<li><a href="/user/logout"><i class="fa fa-sign-out" aria-hidden="true"></i> Logout</a></li>
 				
 				
 			  </ul>
 			</li>
 		{{ else }}
-			<li><a href="/user/signup">Sign-up</a></li>
-			<li><a href="user/signin">Sign-in</a></li>
+			<li><a href="/user/signup"><i class="fa fa-user-plus" aria-hidden="true"></i> Sign-up</a></li>
+			<li><a href="user/signin"><i class="fa fa-sign-in" aria-hidden="true"></i> Sign-in</a></li>
 		{{/if}}
 		
       </ul>
