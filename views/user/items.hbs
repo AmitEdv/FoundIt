@@ -13,7 +13,7 @@
 		<p>You currently have no QR Codes</p>
 		<form action="/user/add-qrcode" method="get">
 			<div class="col-sm-6 col-md-4">
-				<button type="submit" class='btn btn-primary'>Add QR Code</button>
+				<button type="submit" class='btn btn-success'>Add QR Code</button>
 			</div>	
 		</form>
 	</div>
@@ -37,8 +37,7 @@
 					<p>Email of other: {{otherEmail}} </p>
 				{{/if}}
 				<div class="clearfix">
-					<a href="#" class="btn btn-primary" role="button">Edit</a> 
-					<a href="/user/delete/{{_id}}" class="btn btn-default" role="button">Delete</a>
+					<a href="/user/delete/{{_id}}" class="btn btn-success" role="button">Delete</a>
 				</div>
 			  </div>
 			</div>
