@@ -147,8 +147,8 @@ router.post('/signin', passport.authenticate('local.signin', {
 }));
 
 router.get('/qr/:item', function(req,res){
-    res.setHeader('Content-type', 'image/png');
-    req.param.item.img.data.pipe(res);
+    res.setHeader("Content-Type", "image/png");
+    res.send(res.item.img.data);
 });
 
 module.exports = router;
