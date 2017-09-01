@@ -4,6 +4,7 @@ var csrf = require('csurf');
 var passport = require('passport');
 var qrCode = require('qr-image');
 var multer = require('multer');
+var fs = require('fs');
 
 var csrfProtection = csrf();
 router.use(csrfProtection);
