@@ -87,8 +87,8 @@ router.post('/add-qrcode',isLoggedIn, function(req, res, next) {
     qr.user = req.user;
     var qrPng = qrCode.image("https://found-it-mta.herokuapp.com//find/"+String(qr._id), { type: 'png' });
     qrPng.pipe(require('fs').createWriteStream("./"+String(qr._id)+".png"));
-    //qr.img.data = fs.readFileSync(qrPng);
-    //qr.img.contentType = 'image/png';
+    qr.img.data = fs.readFileSync(qrPng.path);
+    qr.img.contentType = 'image/png';
     qr.imagePath=("https://found-it-mta.herokuapp.com//images/"+String(qr._id)+".png");
 	qr.title = req.body.name;
 	qr.sendToMe = tome;
