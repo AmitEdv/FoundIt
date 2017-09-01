@@ -86,9 +86,9 @@ router.post('/add-qrcode',isLoggedIn, function(req, res, next) {
 	}
 	var qr = new QR();
     qr.user = req.user;
-    var qrPng = qrCode.imageSync("https://found-it-mta.herokuapp.com/find/"+String(qr._id), { type: 'png' });
+    var qrImgBuffer = qrCode.imageSync("https://found-it-mta.herokuapp.com/find/"+String(qr._id), { type: 'png' });
     //qrPng.pipe(require('fs').createWriteStream("./public/images/"+String(qr._id)+".png"));
-    qr.img.data = qrPng;
+    qr.img.data = qrImgBuffer;
     qr.img.contentType = 'image/png';
     qr.imagePath=("https://found-it-mta.herokuapp.com/images/"+String(qr._id)+".png")
 	qr.title = req.body.name;
@@ -145,6 +145,11 @@ router.post('/signin', passport.authenticate('local.signin', {
 	failureRedirect: '/user/signin',
 	failureFlash: true //to flash a message
 }));
+
+router.get('/qr/:item', function(req,res){
+    res.setHeader('Content-type', 'image/png');
+    req.param.item.img.data.pipe(res);
+});
 
 module.exports = router;
 
