@@ -3,8 +3,7 @@ var router = express.Router();
 var csrf = require('csurf');
 var passport = require('passport');
 var qrCode = require('qr-image');
-
-
+var multer = require('multer');
 
 var csrfProtection = csrf();
 router.use(csrfProtection);
@@ -28,7 +27,7 @@ router.use('/delete/:id',isLoggedIn, function(req, res) {
 			return res.status(500).send();//need to handle it
 		}
         var fs = require('fs');
-        //fs.unlinkSync("../public/images/"+id+".png");
+        fs.unlinkSync("./"+id+".png");
         QR.findOneAndRemove({_id: id}, function(err,doc){
             console.log(id);
             if (err){
@@ -87,8 +86,10 @@ router.post('/add-qrcode',isLoggedIn, function(req, res, next) {
 	var qr = new QR();
     qr.user = req.user;
     var qrPng = qrCode.image("https://found-it-mta.herokuapp.com//find/"+String(qr._id), { type: 'png' });
-    //qrPng.pipe(require('fs').createWriteStream("../public/images/"+String(qr._id)+".png"));
-    qr.imagePath=("https://found-it-mta.herokuapp.com//images/"+String(qr._id)+".png")
+    qrPng.pipe(require('fs').createWriteStream("./"+String(qr._id)+".png"));
+    //qr.img.data = fs.readFileSync(qrPng);
+    //qr.img.contentType = 'image/png';
+    qr.imagePath=("https://found-it-mta.herokuapp.com//images/"+String(qr._id)+".png");
 	qr.title = req.body.name;
 	qr.sendToMe = tome;
 	qr.sendMeOther = meother;
