@@ -86,12 +86,14 @@ router.post('/add-qrcode',isLoggedIn, function(req, res, next) {
 	}
 	var qr = new QR();
     qr.user = req.user;
-    var qrImgBuffer = qrCode.imageSync("https://found-it-mta.herokuapp.com/find/"+String(qr._id), { type: 'png' });
+    //var qrImgBuffer = qrCode.imageSync("https://found-it-mta.herokuapp.com/find/"+String(qr._id), { type: 'png' });
     //qrPng.pipe(require('fs').createWriteStream("./public/images/"+String(qr._id)+".png"));
-    qr.img.data = qrImgBuffer;
-    qr.img.contentType = 'image/png';
-    qr.imagePath=("https://found-it-mta.herokuapp.com/images/"+String(qr._id)+".png")
-	qr.title = req.body.name;
+    // qr.img.data = qrImgBuffer;
+    // qr.img.contentType = 'image/png';
+    //qr.imagePath=("https://found-it-mta.herokuapp.com/images/"+String(qr._id)+".png")
+    var qrImgBuffer = qrCode.svgObject("https://found-it-mta.herokuapp.com/find/"+String(qr._id), { type: 'png' });
+    qr.imagePath=qrImgBuffer.path;
+    qr.title = req.body.name;
 	qr.sendToMe = tome;
 	qr.sendMeOther = meother;
 	qr.sendOther = other;
@@ -146,10 +148,10 @@ router.post('/signin', passport.authenticate('local.signin', {
 	failureFlash: true //to flash a message
 }));
 
-router.get('/qr/img', function(req,res){
-    res.setHeader("Content-Type", "image/png");
-    res.send(req.img.data);
-});
+// router.get('/qr/img', function(req,res){
+//     res.setHeader("Content-Type", "image/png");
+//     res.send(req.img.data);
+// });
 
 module.exports = router;
 
