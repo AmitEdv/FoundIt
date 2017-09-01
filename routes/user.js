@@ -86,9 +86,10 @@ router.post('/add-qrcode',isLoggedIn, function(req, res, next) {
 	}
 	var qr = new QR();
     qr.user = req.user;
-    var qrPng = qrCode.image("https://found-it-mta.herokuapp.com//find/"+String(qr._id), { type: 'png' });
+    var qrPng = qrCode.imageSync("https://found-it-mta.herokuapp.com//find/"+String(qr._id), { type: 'png' });
     //qrPng.pipe(require('fs').createWriteStream("./"+String(qr._id)+".png"));
-    qr.img.data = fs.readFileSync(qrPng.path);
+    //qr.img.data = fs.readFileSync(qrPng.path);
+    qr.img.data = qrPng;
     qr.img.contentType = 'image/png';
     qr.imagePath=("https://found-it-mta.herokuapp.com//images/"+String(qr._id)+".png");
 	qr.title = req.body.name;
