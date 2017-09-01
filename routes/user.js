@@ -5,9 +5,16 @@ var passport = require('passport');
 var qrCode = require('qr-image');
 var multer = require('multer');
 var fs = require('fs');
+var cloudinary = require('cloudinary');
 
 var csrfProtection = csrf();
 router.use(csrfProtection);
+
+cloudinary.config({
+    cloud_name: 'dwaomktcu',
+    api_key: '568693776788277',
+    api_secret: 'jkPr2BS5-A7NBVIBTf84cq4E2wU'
+});
 
 //we want to import after packages
 var QR = require('../models/qr');
@@ -91,7 +98,14 @@ router.post('/add-qrcode',isLoggedIn, function(req, res, next) {
     // qr.img.data = qrImgBuffer;
     // qr.img.contentType = 'image/png';
     //qr.imagePath=("https://found-it-mta.herokuapp.com/images/"+String(qr._id)+".png")
-    var qrImgBuffer = qrCode.svgObject("https://found-it-mta.herokuapp.com/find/"+String(qr._id), { type: 'png' });
+    var qrImgBuffer = qrCode.image("https://found-it-mta.herokuapp.com/find/"+String(qr._id), { type: 'png' });
+    cloudinary.uploader.upload(
+        req.files.myImage.path,
+        function(result) { console.log(result); },
+        {
+            public_id: 'qr_'+String(qr._id)
+        }
+    );
     qr.imagePath=qrImgBuffer.path;
     qr.title = req.body.name;
 	qr.sendToMe = tome;
