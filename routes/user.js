@@ -90,7 +90,7 @@ router.post('/add-qrcode',isLoggedIn, function(req, res, next) {
     //qrPng.pipe(require('fs').createWriteStream("./public/images/"+String(qr._id)+".png"));
     qr.img.data = qrPng;
     qr.img.contentType = 'image/png';
-    //qr.imagePath=("https://found-it-mta.herokuapp.com/images/"+String(qr._id)+".png")
+    qr.imagePath=("https://found-it-mta.herokuapp.com/images/"+String(qr._id)+".png")
 	qr.title = req.body.name;
 	qr.sendToMe = tome;
 	qr.sendMeOther = meother;
