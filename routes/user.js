@@ -6,6 +6,7 @@ var qrCode = require('qr-image');
 var multer = require('multer');
 var fs = require('fs');
 var cloudinary = require('cloudinary');
+var stream = require('stream');
 
 var csrfProtection = csrf();
 router.use(csrfProtection);
@@ -100,7 +101,8 @@ router.post('/add-qrcode',isLoggedIn, function(req, res, next) {
     //qr.imagePath=("https://found-it-mta.herokuapp.com/images/"+String(qr._id)+".png")
     var stream = cloudinary.v2.uploader.upload_stream(function(error, result){console.log(result)});
     var qrBuffer = qrCode.imageSync("https://found-it-mta.herokuapp.com/find/"+String(qr._id), { type: 'png' });
-    fs.createReadStream(qrBuffer).pipe(stream);
+    var bufferStream = new stream.PassThrough();
+    bufferStream.end(new Buffer(qrBuffer)).pipe(stream)
     console.log("qrBuffer = " + qrBuffer.toString());
     qr.imagePath=qrImgBuffer.path;
     qr.title = req.body.name;
