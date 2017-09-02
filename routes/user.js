@@ -99,8 +99,9 @@ router.post('/add-qrcode',isLoggedIn, function(req, res, next) {
     // qr.img.contentType = 'image/png';
     //qr.imagePath=("https://found-it-mta.herokuapp.com/images/"+String(qr._id)+".png")
     var stream = cloudinary.v2.uploader.upload_stream(function(error, result){console.log(result)});
-    var qrPng = qrCode.image("https://found-it-mta.herokuapp.com/find/"+String(qr._id), { type: 'png' });
-    qrPng.pipe(require('fs').createReadStream("qr_"+String(qr._id)+".png")).pipe(stream);
+    var qrBuffer = qrCode.imageSync("https://found-it-mta.herokuapp.com/find/"+String(qr._id), { type: 'png' });
+    fs.createReadStream(qrBuffer).pipe(stream);
+    console.log("qrBuffer = " + qrBuffer.toString());
     qr.imagePath=qrImgBuffer.path;
     qr.title = req.body.name;
 	qr.sendToMe = tome;
