@@ -16,7 +16,7 @@ var transporter = nodemailer.createTransport({
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Found It!' });
+  res.render('index', { title: 'FoundIt!' });
 });
 router.get('/howToUse', function(req, res, next) {
     res.render('howToUse');
