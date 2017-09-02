@@ -1,6 +1,71 @@
 .thumbnail img {
 	max-height: 150px;
 }
+body { padding: 30px; }
+
+.steps {
+	list-style: none;
+	padding: 0;
+	margin: 0 0 20px 0;
+	border: 1px solid #eaeaea;
+	overflow: hidden;
+	display: inline-block;
+	background-color: #f0f0f0;
+}
+.steps li {
+	float: left;
+	color: #ccc;
+	line-height: 30px;
+	padding: 0 10px 0 15px;
+	font-size: 12px;
+	text-align: center;
+	position: relative;
+}
+.steps li + li {
+	padding: 0 7px 0 28px;
+}
+.steps li:last-child {
+	padding-right: 15px;
+}
+.steps .active {
+	background-color: #82b548;
+	color: #fff;
+}
+.steps li:after,
+.steps li:before {
+	left: 100%;
+	border: solid transparent;
+	content: " ";
+	height: 0;
+	width: 0;
+	position: absolute;
+	pointer-events: none;
+	z-index: 5;
+}
+.steps li:after {
+	border-left-color: #f0f0f0;
+	border-width: 15px;
+	top: 50%;
+	margin-top: -15px;
+
+}
+.steps li:before {
+	border-left-color: #ccc;
+	border-width: 16px;
+	top: 50%;
+	margin-top: -16px;
+}
+.steps .active:after {
+	border-left-color: #82b548;
+}
+.steps .active:before {
+	border-left-color: #ffffff;
+}
+.container2 {
+	background: #e3e3e3;
+	margin-bottom: 20px;
+	padding-bottom: 20px;
+}
 
 .img1 {
 	right: 0px;
@@ -29,7 +94,7 @@ body, html {
 	height: 100%;
 }
 
-body, h1, h2, h3, h4, h5, h6 {
+body, h1, h2, h3, h4, h5, h6, a {
 	font-family: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
 	font-weight: 700;
 }
