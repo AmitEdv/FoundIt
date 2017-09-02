@@ -3,11 +3,19 @@ var router = express.Router();
 var csrf = require('csurf');
 var passport = require('passport');
 var qrCode = require('qr-image');
-
-
+var multer = require('multer');
+var fs = require('fs');
+var cloudinary = require('cloudinary');
+var stream = require('stream');
 
 var csrfProtection = csrf();
 router.use(csrfProtection);
+
+cloudinary.config({
+    cloud_name: 'dwaomktcu',
+    api_key: '568693776788277',
+    api_secret: 'jkPr2BS5-A7NBVIBTf84cq4E2wU'
+});
 
 //we want to import after packages
 var QR = require('../models/qr');
@@ -28,7 +36,7 @@ router.use('/delete/:id',isLoggedIn, function(req, res) {
 			return res.status(500).send();//need to handle it
 		}
         var fs = require('fs');
-        fs.unlinkSync("C:/foundIt/public/images/"+id+".png");
+        //fs.unlinkSync("C:/foundIt/public/images/"+id+".png");
         QR.findOneAndRemove({_id: id}, function(err,doc){
             console.log(id);
             if (err){
@@ -86,16 +94,14 @@ router.post('/add-qrcode',isLoggedIn, function(req, res, next) {
 	}
 	var qr = new QR();
     qr.user = req.user;
-    var qrPng = qrCode.image("http://localhost:3000/find/"+String(qr._id), { type: 'png' });
-    qrPng.pipe(require('fs').createWriteStream("./public/images/"+String(qr._id)+".png"));
-    qr.imagePath=("http://localhost:3000/images/"+String(qr._id)+".png")
-	qr.title = req.body.name;
+	qr.destPath="https://found-it-mta.herokuapp.com/find/"+String(qr._id);
+    qr.imagePath="https://found-it-mta.herokuapp.com/qrc?text="+qr.destPath;
+    qr.title = req.body.name;
 	qr.sendToMe = tome;
 	qr.sendMeOther = meother;
 	qr.sendOther = other;
 	qr.otherPhone = phone;
 	qr.otherEmail = email;
-
 
 	qr.save(function(err, result){
 		console.log(err);
