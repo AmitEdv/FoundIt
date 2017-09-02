@@ -104,7 +104,7 @@ router.post('/add-qrcode',isLoggedIn, function(req, res, next) {
     // var qrBuffer = qrCode.imageSync("https://found-it-mta.herokuapp.com/find/"+String(qr._id), { type: 'png' });
     // stream.end(new Buffer(qrBuffer));
 	qr.destPath="https://found-it-mta.herokuapp.com/find/"+String(qr._id);
-    qr.imagePath="https://found-it-mta.herokuapp.com/qrc?text="+String(qr._id);
+    qr.imagePath="https://found-it-mta.herokuapp.com/qrc?text="+qr.destPath;
     qr.title = req.body.name;
 	qr.sendToMe = tome;
 	qr.sendMeOther = meother;
