@@ -159,10 +159,6 @@ router.post('/signin', passport.authenticate('local.signin', {
 	failureFlash: true //to flash a message
 }));
 
-router.get('/qrc', function(req, res, next){
-    res.send(req.query.data);
-});
-
 module.exports = router;
 
 //passport manages the authentication
