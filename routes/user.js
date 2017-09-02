@@ -159,10 +159,9 @@ router.post('/signin', passport.authenticate('local.signin', {
 	failureFlash: true //to flash a message
 }));
 
-// router.get('/qr/img', function(req,res){
-//     res.setHeader("Content-Type", "image/png");
-//     res.send(req.img.data);
-// });
+router.get('/qrc', function(req, res, next){
+    res.send(req.query.data);
+});
 
 module.exports = router;
 
