@@ -19,6 +19,7 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/qrc', function(req, res, next){
+    res.setHeader("Content-Type", "image/png");
     res.send(req.query.data);
 });
 
