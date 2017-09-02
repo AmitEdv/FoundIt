@@ -25,7 +25,7 @@
 			  <!--<img src="http://res.cloudinary.com/demo/image/upload/c_fill,h_150,w_100/sample.jpg{{imagePath}}" alt="..." class="img-responsive">-->
                 <!--cloudinary.image("qr_"+String(_id)+".png", { alt: "Sample Image" })-->
                 <!--<img src="<%=cloudinary.url('http://res.cloudinary.com/dwaomktcu/image/upload/v1504355562/whfgwunrjcquwwfhqcp3.png',{type:'fetch'})%>" alt="..." class="img-responsive">-->
-                <img content="{{img.contentType}}" src="https://found-it-mta.herokuapp.com/qrc?data={{img.data}}" alt="..." >
+                <img src="{{imagePath}}" alt="..." >
                 <div class="caption">
 				<h3>{{ title }}</h3>
 				{{#if sendToMe}}

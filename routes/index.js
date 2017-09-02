@@ -4,6 +4,7 @@ var csrf = require('csurf');
 var nodemailer = require('nodemailer');
 var QR = require('../models/qr');
 var User = require('../models/user');
+var qrCode = require('qr-image');
 
 var transporter = nodemailer.createTransport({
     service: 'gmail',
@@ -18,9 +19,15 @@ router.get('/', function(req, res, next) {
   res.render('index', { title: 'FoundIt!' });
 });
 
-router.get('/qrc', function(req, res, next){
+// router.get('/qrc', function(req, res, next){
+//     res.setHeader("Content-Type", "image/png");
+//     res.send(req.query.data);
+// });
+
+router.get("/qrc", function(req, res, next) {
+    var text = req.query.text;
     res.setHeader("Content-Type", "image/png");
-    res.send(req.query.data);
+    res.send(qrCode.imageSync(text, {type: "png"}));
 });
 
 router.get('/find/:id',function(req,res,next){
