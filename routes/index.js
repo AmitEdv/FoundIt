@@ -9,22 +9,19 @@ var transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
         user: 'foundit.mta@gmail.com',
-        pass: 'founditmta'
+        pass: 'founditproject'
     }
 });
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'FoundIt!' });
+  res.render('index', { title: 'Found It!' });
 });
 router.get('/find/:id',function(req,res,next){
     res.render('find', {id:req.params.id});
 });
 router.post('/find/:id', function(req, res, next) {
     var qrId=req.params.id;
-    //var userEmail;
-    //var userId;
-    //var desc;
     var msg=req.body.msg;
     QR.findById(qrId,function(err,doc) {
         console.log(qrId);
@@ -42,22 +39,55 @@ router.post('/find/:id', function(req, res, next) {
                 console.log(err);
                 return res.status(500).send();//need to handle it
             }
-           var userEmail=docIn.email
-           var mailOptions = {
-               from: 'foundit.mta@gmail.com',
-               to: userEmail,
-               subject: 'Your '+desc+' Has Been Found!',
-               text: msg
-           };
-           transporter.sendMail(mailOptions, function(error, info) {
-               if (error) {
-                   console.log(error);
-               } else {
-                   console.log('Email sent: ' + info.response);
-               }
-           })
-           req.flash('success', 'Thank You. Your message was successfully sent!');
-           res.redirect('/');
+            var sendToMe = false;
+            var whoToSend = docIn.email;
+            if (doc.sendToMe || doc.sendOther) {
+                if (doc.sendOther) {
+                    whoToSend = doc.otherEmail;
+                }
+                var mailOptions = {
+                    from: 'foundit.mta@gmail.com',
+                    to: whoToSend,
+                    subject: 'Your ' + desc + ' Has Been Found!',
+                    text: msg
+                };
+                transporter.sendMail(mailOptions, function (error, info) {
+                    if (error) {
+                        console.log(error);
+                    } else {
+                        console.log('Email sent: ' + info.response);
+                    }
+                })
+            }
+            else {
+                var mailOptions = {
+                    from: 'foundit.mta@gmail.com',
+                    to: whoToSend,
+                    subject: 'Your ' + desc + ' Has Been Found!',
+                    text: msg
+                };
+                transporter.sendMail(mailOptions, function (error, info) {
+                    if (error) {
+                        console.log(error);
+                    } else {
+                        console.log('Email sent: ' + info.response);
+                        var mailOptions = {
+                            from: 'foundit.mta@gmail.com',
+                            to: doc.otherEmail,
+                            subject: 'Your ' + desc + ' Has Been Found!',
+                            text: msg
+                        };
+                        transporter.sendMail(mailOptions, function (error, info) {
+                            if (error) {
+                                console.log(error);
+                            } else {
+                                console.log('Email sent: ' + info.response);
+                            }
+                        })
+                    }
+                })
+            }
+            res.redirect('/');
         });
     });
 
