@@ -17,6 +17,9 @@ var transporter = nodemailer.createTransport({
 router.get('/', function(req, res, next) {
   res.render('index', { title: 'Found It!' });
 });
+router.get('/howToUse', function(req, res, next) {
+    res.render('howToUse');
+});
 router.get('/find/:id',function(req,res,next){
     res.render('find', {id:req.params.id});
 });
