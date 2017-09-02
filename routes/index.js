@@ -7,7 +7,7 @@ var User = require('../models/user');
 var qrCode = require('qr-image');
 
 var transporter = nodemailer.createTransport({
-    service: 'gmail',
+    service: 'Gmail',
     auth: {
         user: 'foundit.mta@gmail.com',
         pass: 'founditproject'
